@@ -71,9 +71,10 @@ namespace UnitTests.PopcornApi.Controllers.V1
         public async void RefreshToken_WithData_Returns200()
         {
             //Arrange
+            Mock<IHttpContextAccessor> httpContextAccessorMock = new();
             fixture.Customize<AppSettings>(c => c.With(x => x.Authentication, new AuthenticationSettings() { Key = fixture.Create<string>(), ExpireIn = 1, RefreshIn = 2 }));
             var appSettings = fixture.Create<AppSettings>();
-            var tokenService = new TokenService(appSettings);
+            var tokenService = new TokenService(httpContextAccessorMock.Object, appSettings);
 
             appSettingsMock.SetupGet(m => m.Authentication).Returns(() => appSettings.Authentication);
 

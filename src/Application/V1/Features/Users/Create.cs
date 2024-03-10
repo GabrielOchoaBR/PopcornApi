@@ -1,8 +1,10 @@
 ﻿using System;
 using Application.Engines.Cryptography;
+using Application.Engines.DataControl;
 using Application.Mappers;
 using Application.V1.Dtos.Admin.Users;
 using Application.Validations;
+using Domain.V1.Entities.Medias;
 using Domain.V1.Entities.Users;
 using FluentValidation;
 using Infrastructure.UnitOfWork;
@@ -17,16 +19,18 @@ namespace Application.V1.Features.Users
             public required UserPostDto UserPostDto { get; set; }
         }
 
-        public sealed class Handler(IUnitOfWork unitOfWork, ITextCryptography textCryptography) : IRequestHandler<Command, UserGetDto?>
+        public sealed class Handler(IUnitOfWork unitOfWork, ITextCryptography textCryptography, IUserDataControl userDataControl) : IRequestHandler<Command, UserGetDto?>
         {
             private readonly IUnitOfWork unitOfWork = unitOfWork;
             private readonly ITextCryptography textCryptography = textCryptography;
+            private readonly IUserDataControl userDataControl = userDataControl;
 
             public async Task<UserGetDto?> Handle(Command request, CancellationToken cancellationToken)
             {
                 User user = request.UserPostDto.ToDomainModel();
-
                 user.Password = await textCryptography.HashAsync(user.Password);
+
+                userDataControl.SetCreatedInfo(user);
 
                 await unitOfWork.GetUserRepository().InsertOneAsync(user);
 

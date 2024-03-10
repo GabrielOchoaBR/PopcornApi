@@ -2,14 +2,17 @@
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Application.Engines.DataControl;
 using Application.V1.Dtos.Admin.Users;
 using Microsoft.IdentityModel.Tokens;
 using PopcornApi.Model.Settings;
 
 namespace PopcornApi.Security.TokenServices
 {
-    public class TokenService(IAppSettings settings) : ITokenService
+    public class TokenService(IHttpContextAccessor httpContextAccessor, IAppSettings settings) : ITokenService, IAuthorizationService
     {
+        private readonly IHttpContextAccessor httpContextAccessor = httpContextAccessor;
+
         private readonly IAppSettings appSettings = settings;
         public string GenerateToken(UserGetDto user, DateTime tokenExpiredAt)
         {
@@ -75,6 +78,20 @@ namespace PopcornApi.Security.TokenServices
             }
 
             return principal;
+        }
+
+        public string? GetUserId()
+        {
+            var httpContext = this.httpContextAccessor.HttpContext!;
+
+            var userId = httpContext.User.Identity?.Name;
+
+            if (userId != null)
+            {
+                return userId;
+            }
+
+            return null;
         }
     }
 }

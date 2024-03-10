@@ -6,6 +6,7 @@ using Application.Logging;
 using Application.Engines.Cryptography;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using Application.Engines.DataControl;
 
 namespace Application
 {
@@ -23,6 +24,7 @@ namespace Application
             services.AddValidatorsFromAssembly(typeof(Configuration).Assembly);
             services.AddSingleton<IPasswordValidation>(passwordValidatorConfiguration);
             services.AddTransient<ITextCryptography, TextCryptography>();
+            services.AddTransient<IUserDataControl, UserDataControl>();
         }
     }
 }

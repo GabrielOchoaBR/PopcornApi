@@ -12,7 +12,7 @@ namespace UnitTests.Application.Features.V1.Medias
         private readonly Update.Handler handler;
 
         public UpdateTests() 
-            => handler = new Update.Handler(unitOfWorkMock.Object);
+            => handler = new Update.Handler(unitOfWorkMock.Object, userDataControlMock.Object);
 
         [Theory, AutoData]
         public async void Handler_NotFoundData_ReturnsNull(Update.Command command)

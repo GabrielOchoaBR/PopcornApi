@@ -11,7 +11,7 @@ namespace UnitTests.Application.Features.V1.Medias
     {
         private readonly Create.Handler handler;
         public CreateTests()
-            => handler = new Create.Handler(unitOfWorkMock.Object);
+            => handler = new Create.Handler(unitOfWorkMock.Object, userDataControlMock.Object);
 
         [Theory, AutoData]
         public async void Handler_Data_ReturnsOk(Create.Command command)

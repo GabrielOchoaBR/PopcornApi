@@ -15,7 +15,7 @@ namespace UnitTests.Application.Features.V1.Users
 
         public CreateTests()
         {
-            handler = new(unitOfWorkMock.Object, textCryptographyMock.Object);
+            handler = new(unitOfWorkMock.Object, textCryptographyMock.Object, userDataControlMock.Object);
         }
 
         [Theory, AutoData]

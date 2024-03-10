@@ -1,4 +1,6 @@
-﻿using Infrastructure.Repositories.Medias;
+﻿using Application.Engines.DataControl;
+using Domain.V1.Entities;
+using Infrastructure.Repositories.Medias;
 using Infrastructure.Repositories.Users;
 using Infrastructure.UnitOfWork;
 using Moq;
@@ -10,6 +12,7 @@ namespace UnitTests.Application.Features
         protected readonly Mock<IUnitOfWork> unitOfWorkMock = new();
         protected readonly Mock<IUserRepository> userRepositoryMock = new();
         protected readonly Mock<IMediaRepository> mediaRepositoryMock = new();
+        protected readonly Mock<IUserDataControl> userDataControlMock = new();
 
         public BaseRepositoryTests()
         {

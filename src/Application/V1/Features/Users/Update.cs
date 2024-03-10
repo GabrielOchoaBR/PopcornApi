@@ -1,4 +1,5 @@
-﻿using Application.Mappers;
+﻿using Application.Engines.DataControl;
+using Application.Mappers;
 using Application.V1.Dtos.Admin.Users;
 using Domain.V1.Entities.Users;
 using FluentValidation;
@@ -16,9 +17,10 @@ namespace Application.V1.Features.Users
             public required UserPutDto UserPutDto { get; set; }
         }
 
-        public sealed class Handler(IUnitOfWork unitOfWork) : IRequestHandler<Command, UserGetDto?>
+        public sealed class Handler(IUnitOfWork unitOfWork, IUserDataControl userDataControl) : IRequestHandler<Command, UserGetDto?>
         {
             private readonly IUnitOfWork unitOfWork = unitOfWork;
+            private readonly IUserDataControl userDataControl = userDataControl;
 
             public async Task<UserGetDto?> Handle(Command request, CancellationToken cancellationToken)
             {
@@ -28,6 +30,8 @@ namespace Application.V1.Features.Users
                     return null;
 
                 userPersist.Parse(request.UserPutDto);
+
+                userDataControl.SetModifiedInfo(userPersist);
 
                 User? changed = await unitOfWork.GetUserRepository().ReplaceOneAsync(userPersist);
 

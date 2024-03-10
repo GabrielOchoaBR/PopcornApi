@@ -1243,3 +1243,14 @@ Information - 0 - Handling Query - 03/08/2024 21:00:56
 Information - 0 - Handled ResponseGetAll`1 - 03/08/2024 21:00:57 (440ms).
 Information - 0 - Handling Command - 03/08/2024 21:01:37
 Information - 0 - Handled MediaGetDto - 03/08/2024 21:02:23 (45758ms).
+Information - ListeningOnAddress - Now listening on: https://localhost:7129
+Information - ListeningOnAddress - Now listening on: http://localhost:5007
+Information - 0 - Application started. Press Ctrl+C to shut down.
+Information - 0 - Hosting environment: Development
+Information - 0 - Content root path: C:\GABRIEL\GABRIEL\TESTES\C#\4 - Popcorn\src\PopcornApi
+Information - 0 - Handling Query - 03/10/2024 10:53:27
+Information - 0 - Handled UserGetDto - 03/10/2024 10:53:29 (2188ms).
+Information - 0 - Handling Command - 03/10/2024 10:53:30
+Information - 0 - Handled UserGetDto - 03/10/2024 10:53:30 (144ms).
+Information - 0 - Handling Command - 03/10/2024 10:55:11
+Information - 0 - Handled MediaGetDto - 03/10/2024 10:55:48 (37232ms).

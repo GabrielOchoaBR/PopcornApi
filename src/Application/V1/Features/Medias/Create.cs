@@ -1,4 +1,5 @@
-﻿using Application.Mappers;
+﻿using Application.Engines.DataControl;
+using Application.Mappers;
 using Application.V1.Dtos.Medias;
 using Domain.V1.Entities.Medias;
 using FluentValidation;
@@ -14,9 +15,10 @@ namespace Application.V1.Features.Medias
             public required MediaPostDto MediaPostDto { get; set; }
         }
 
-        public sealed class Handler(IUnitOfWork unitOfWork) : IRequestHandler<Command, MediaGetDto>
+        public sealed class Handler(IUnitOfWork unitOfWork, IUserDataControl userDataControl) : IRequestHandler<Command, MediaGetDto>
         {
             private readonly IUnitOfWork unitOfWork = unitOfWork;
+            private readonly IUserDataControl userDataControl = userDataControl;
 
             public async Task<MediaGetDto> Handle(Command request, CancellationToken cancellationToken)
             {
@@ -29,6 +31,8 @@ namespace Application.V1.Features.Medias
                 Director? diretor = await unitOfWork.GetMediaRepository().DirectorFindByNameAsync(media.Director!.Name);
                 if (diretor != null)
                     media.Director = diretor;
+
+                userDataControl.SetCreatedInfo(media);
 
                 await unitOfWork.GetMediaRepository().InsertOneAsync(media);
 

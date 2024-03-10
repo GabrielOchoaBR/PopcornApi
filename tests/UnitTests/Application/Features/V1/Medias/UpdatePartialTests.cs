@@ -13,7 +13,7 @@ namespace UnitTests.Application.Features.V1.Medias
         private readonly UpdatePartial.Handler handler;
 
         public UpdatePartialTests() 
-            => handler = new UpdatePartial.Handler(unitOfWorkMock.Object);
+            => handler = new UpdatePartial.Handler(unitOfWorkMock.Object, userDataControlMock.Object);
 
         [Fact]
         public async void Handler_NotFoundData_ReturnsNull()

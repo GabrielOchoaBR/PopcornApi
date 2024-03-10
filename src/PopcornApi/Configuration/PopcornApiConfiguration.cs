@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Application.Engines.DataControl;
 using Asp.Versioning;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.RateLimiting;
@@ -95,8 +96,10 @@ namespace PopcornApi.Configuration
                 rateLimiter.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
             });
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IAppSettings>(x => AppSettingsConfiguration.GetSettings());
             services.AddTransient<ITokenService, TokenService>();
+            services.AddTransient<IAuthorizationService, TokenService>();
         }
     }
 }

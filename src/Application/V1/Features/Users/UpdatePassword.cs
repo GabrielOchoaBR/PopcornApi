@@ -1,4 +1,5 @@
 ﻿using Application.Engines.Cryptography;
+using Application.Engines.DataControl;
 using Application.Mappers;
 using Application.V1.Dtos.Admin.Users;
 using Application.Validations;
@@ -16,10 +17,11 @@ namespace Application.V1.Features.Users
             public required UserPostUpdatePasswordDto UserPostUpdatePasswordDto { get; set; }
         }
 
-        public sealed class Handler(IUnitOfWork unitOfWork, ITextCryptography textCryptography) : IRequestHandler<Command, UserGetDto?>
+        public sealed class Handler(IUnitOfWork unitOfWork, ITextCryptography textCryptography, IUserDataControl userDataControl) : IRequestHandler<Command, UserGetDto?>
         {
             private readonly IUnitOfWork unitOfWork = unitOfWork;
             private readonly ITextCryptography textCryptography = textCryptography;
+            private readonly IUserDataControl userDataControl = userDataControl;
 
             public async Task<UserGetDto?> Handle(Command request, CancellationToken cancellationToken)
             {
@@ -30,6 +32,8 @@ namespace Application.V1.Features.Users
                     return null;
 
                 user.Password = await textCryptography.HashAsync(request.UserPostUpdatePasswordDto.NewPassword);
+
+                userDataControl.SetModifiedInfo(user);
 
                 User changed = await unitOfWork.GetUserRepository().ReplaceOneAsync(user);
 

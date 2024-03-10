@@ -12,7 +12,7 @@ namespace UnitTests.Application.Features.V1.Users
     {
         private readonly Update.Handler handler;
         public UpdateTests() 
-            => handler = new(unitOfWorkMock.Object);
+            => handler = new(unitOfWorkMock.Object, userDataControlMock.Object);
 
         [Theory, AutoData]
         public async void Handler_WrongIdentity_ReturnsNull(Update.Command command)
