@@ -23,6 +23,10 @@ namespace Infrastructure.Repositories
             return (documentType.GetCustomAttributes(typeof(BsonCollectionAttribute), true).FirstOrDefault() as BsonCollectionAttribute)?.CollectionName;
         }
 
+        public virtual async Task<IQueryable<TDocument>> GetQueryableAsync()
+        {
+            return await Task.Run(() => collection.AsQueryable());
+        }
 
         public virtual Task<TDocument> FindOneAsync(Expression<Func<TDocument, bool>> filterExpression)
         {

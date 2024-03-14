@@ -46,7 +46,9 @@ app.UseHttpsRedirection();
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllers()
     .RequireAuthorization();
+app.MapGraphQL("/graphql");
 
 app.Run();

@@ -14,5 +14,6 @@ namespace Infrastructure.Repositories
         Task InsertOneAsync(TDocument document);
         Task<TDocument> ReplaceOneAsync(TDocument document);
         Task<TDocument> DeleteByIdAsync(string id);
+        Task<IQueryable<TDocument>> GetQueryableAsync();
     }
 }

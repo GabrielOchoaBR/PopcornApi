@@ -1,4 +1,6 @@
 ﻿using Application.V1.Dtos.Medias;
+using Application.V1.Dtos.Medias.Director;
+using Application.V1.Dtos.Medias.Rating;
 using Domain.V1.Entities.Medias;
 
 namespace Application.Mappers
@@ -69,5 +71,26 @@ namespace Application.Mappers
                 media.CreatedBy?.ToString(),
                 media.UpdatedAt,
                 media.UpdatedBy?.ToString());
+
+        public static IQueryable<MediaGetDto> SelectToDto(this IQueryable<Media> medias) =>
+            medias.Select(x => new MediaGetDto(x.Id.ToString(),
+                                            x.Title,
+                                            x.ContentType,
+                                            x.Description,
+                                            x.DateAdded,
+                                            x.ReleaseYear,
+                                            x.Duration,
+                                            x.Rating != null ?
+                                                            new RatingGetDto(x.Rating.Id.ToString(), x.Rating.Name, x.Rating.AllowedAge)
+                                                        : null,
+                                            x.Director != null ?
+                                                            new DirectorGetDto(x.Director.Id.ToString(), x.Director.Name, x.Director.BirthDate)
+                                                        : null,
+                                            x.Cast,
+                                            x.Countries,
+                                            x.CreatedAt,
+                                            x.CreatedBy.ToString(),
+                                            x.UpdatedAt,
+                                            x.UpdatedBy.ToString()));
     }
 }

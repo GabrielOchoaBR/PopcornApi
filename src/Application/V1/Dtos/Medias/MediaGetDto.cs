@@ -18,5 +18,25 @@ namespace Application.V1.Dtos.Medias
                               DateTime CreatedAt,
                               string? CreatedBy,
                               DateTime? UpdatedAt,
-                              string? UpdatedBy);
+                              string? UpdatedBy)
+    {
+        public MediaGetDto() :
+            this(string.Empty,
+                 string.Empty,
+                 null,
+                 string.Empty,
+                 null,
+                 0,
+                 0,
+                 null,
+                 null,
+                 null,
+                 null,
+                 DateTime.MinValue,
+                 string.Empty,
+                 null,
+                 string.Empty)
+        {
+        }
+    }
 }

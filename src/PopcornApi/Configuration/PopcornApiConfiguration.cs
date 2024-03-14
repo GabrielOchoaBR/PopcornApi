@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using PopcornApi.Controllers.V1;
 using PopcornApi.Middlewares;
 using PopcornApi.Model.Settings;
 using PopcornApi.Security.TokenServices;
@@ -38,7 +39,7 @@ namespace PopcornApi.Configuration
                 x.SchemaFilter<LoginSampleFilter>();
                 x.SchemaFilter<GetAllSampleFilter>();
 
-                x.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{typeof(PopcornApiConfiguration).Assembly.GetName().Name}.xml"));
+                x.IncludeXmlComments(System.IO.Path.Combine(AppContext.BaseDirectory, $"{typeof(PopcornApiConfiguration).Assembly.GetName().Name}.xml"));
 
                 x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
@@ -95,6 +96,13 @@ namespace PopcornApi.Configuration
                 });
                 rateLimiter.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
             });
+
+            services.AddGraphQLServer()
+                .AddAuthorization()
+                .AddQueryType<QueryController>()
+                .AddMongoDbProjections()
+                .AddMongoDbFiltering()
+                .AddMongoDbSorting();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IAppSettings>(x => AppSettingsConfiguration.GetSettings());
