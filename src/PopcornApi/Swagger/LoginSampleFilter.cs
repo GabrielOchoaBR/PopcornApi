@@ -14,7 +14,7 @@ namespace PopcornApi.Swagger
                 schema.Example = new OpenApiObject()
                 {
                     ["name"] = new OpenApiString("root"),
-                    ["password"] = new OpenApiString("MyPassword1"),
+                    ["password"] = new OpenApiString("MyPassword@123"),
                 };
             }
         }
