@@ -16,12 +16,10 @@ namespace Infrastructure
 
             services.AddScoped<AppDbContext.Connection>(x => () =>
             {
-                var mongoDatabase = new MongoClient(appDbContextConfig.ConnectionString).GetDatabase(appDbContextConfig.DatabaseName);
-
                 if (appDbContextConfig.DatabaseName == null)
                     throw new Exception("DatabaseName is invalid.");
 
-                return mongoDatabase;
+                return new MongoClient(appDbContextConfig.ConnectionString).GetDatabase(appDbContextConfig.DatabaseName); 
             });
 
             services.AddLogging(x =>
