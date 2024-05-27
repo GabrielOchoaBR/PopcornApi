@@ -1,10 +1,8 @@
-﻿using System;
-using Application.Engines.Cryptography;
+﻿using Application.Engines.Cryptography;
 using Application.Engines.DataControl;
 using Application.Mappers;
 using Application.V1.Dtos.Admin.Users;
 using Application.Validations;
-using Domain.V1.Entities.Medias;
 using Domain.V1.Entities.Users;
 using FluentValidation;
 using Infrastructure.UnitOfWork;
