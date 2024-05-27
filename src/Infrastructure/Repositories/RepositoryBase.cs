@@ -16,12 +16,12 @@ namespace Infrastructure.Repositories
             collection = database.GetCollection<TDocument>(RepositoryBase<TDocument>.GetCollectionName(typeof(TDocument)));
         }
 
-        protected abstract FilterDefinition<TDocument> GetAllFilterDefinition(string searchTerm);
-
         protected static string? GetCollectionName(Type documentType)
         {
             return (documentType.GetCustomAttributes(typeof(BsonCollectionAttribute), true).FirstOrDefault() as BsonCollectionAttribute)?.CollectionName;
         }
+
+        protected abstract FilterDefinition<TDocument> GetAllFilterDefinition(string searchTerm);
 
         public virtual async Task<IQueryable<TDocument>> GetQueryableAsync()
         {
