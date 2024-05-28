@@ -1,12 +1,11 @@
-﻿using MediatR;
-using FluentValidation;
-using Microsoft.Extensions.DependencyInjection;
-using Application.Validations;
-using Application.Logging;
-using Application.Engines.Cryptography;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
+﻿using Application.Engines.Cryptography;
 using Application.Engines.DataControl;
+using Application.Logging;
+using Application.Validations;
+using FluentValidation;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Application
 {

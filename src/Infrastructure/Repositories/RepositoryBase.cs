@@ -28,9 +28,9 @@ namespace Infrastructure.Repositories
             return await Task.Run(() => collection.AsQueryable());
         }
 
-        public virtual Task<TDocument> FindOneAsync(Expression<Func<TDocument, bool>> filterExpression)
+        public virtual async Task<TDocument> FindOneAsync(Expression<Func<TDocument, bool>> filterExpression)
         {
-            return Task.Run(() => collection.Find(filterExpression).FirstOrDefaultAsync());
+            return await Task.Run(() => collection.Find(filterExpression).FirstOrDefaultAsync());
         }
 
         public virtual async Task<(IEnumerable<TDocument>, long TotalCount)> GetAllAsync(string searchTerm, string? sortColumn, string? sortDirection, int pageIndex, int pageSize)
@@ -55,9 +55,9 @@ namespace Infrastructure.Repositories
             return (result, totalRecords);
         }
 
-        public virtual Task<TDocument> FindByIdAsync(string id)
+        public virtual async Task<TDocument> FindByIdAsync(string id)
         {
-            return Task.Run(() =>
+            return await Task.Run(() =>
             {
                 var objectId = new ObjectId(id);
                 var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, objectId);
@@ -88,7 +88,7 @@ namespace Infrastructure.Repositories
             return await collection.FindOneAndReplaceAsync(filter, document);
         }
 
-        public async Task<TDocument> DeleteByIdAsync(string id)
+        public virtual async Task<TDocument> DeleteByIdAsync(string id)
         {
             var objectId = new ObjectId(id);
             var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, objectId);

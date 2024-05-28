@@ -11,10 +11,8 @@ namespace Infrastructure.UnitOfWork
         private IUserRepository? userRepository;
         private IMediaRepository? mediaRepository;
 
-        public IUserRepository GetUserRepository()
-            => userRepository ??= new UserRepository(appDbContext);
+        public IUserRepository GetUserRepository() => userRepository ??= new UserRepository(appDbContext);
 
-        public IMediaRepository GetMediaRepository()
-            => mediaRepository ??= new MediaRepository(appDbContext);
+        public IMediaRepository GetMediaRepository() => mediaRepository ??= new MediaRepository(appDbContext);
     }
 }
