@@ -1,8 +1,8 @@
-﻿using Application.Engines.Cryptography;
+﻿using Application.Configurations;
+using Application.Engines.Cryptography;
 using Application.Engines.DataControl;
 using Application.Mappers;
 using Application.V1.Dtos.Admin.Users;
-using Application.Validations;
 using Domain.V1.Entities.Users;
 using FluentValidation;
 using Infrastructure.UnitOfWork;
@@ -41,7 +41,7 @@ namespace Application.V1.Features.Users
 
         public sealed class Validator : AbstractValidator<Command>
         {
-            public Validator(IUnitOfWork unitOfWork, IPasswordValidation passwordValidation)
+            public Validator(IUnitOfWork unitOfWork, IPasswordConfiguration passwordValidation)
             {
                 RuleFor(x => x.UserPostDto.Name)
                     .NotEmpty()

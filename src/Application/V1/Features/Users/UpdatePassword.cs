@@ -1,8 +1,8 @@
-﻿using Application.Engines.Cryptography;
+﻿using Application.Configurations;
+using Application.Engines.Cryptography;
 using Application.Engines.DataControl;
 using Application.Mappers;
 using Application.V1.Dtos.Admin.Users;
-using Application.Validations;
 using Domain.V1.Entities.Users;
 using FluentValidation;
 using Infrastructure.UnitOfWork;
@@ -46,7 +46,7 @@ namespace Application.V1.Features.Users
 
         public sealed class Validator : AbstractValidator<Command>
         {
-            public Validator(IPasswordValidation passwordValidation)
+            public Validator(IPasswordConfiguration passwordValidation)
             {
                 RuleFor(x => x.UserPostUpdatePasswordDto.Id)
                     .Must((Id) => MongoDB.Bson.ObjectId.TryParse(Id, out _))

@@ -1,5 +1,5 @@
 using Application;
-using Application.Validations;
+using Application.Configurations;
 using Infrastructure;
 using Infrastructure.Context;
 using Infrastructure.Logging;
@@ -22,7 +22,7 @@ builder.Services.AddInfrastructureConfiguration(new AppDbContextConfiguration()
         EventId = appSettings.Logger.EventId,
         FileName = appSettings.Logger.FileName
     });
-builder.Services.AddApplicationConfiguration(new PasswordValidation()
+builder.Services.AddApplicationConfiguration(new PasswordConfiguration()
 {
     RegexPattern = appSettings.UserConfiguration.PasswordValidation,
     ErrorMessage = appSettings.UserConfiguration.PasswordValidationMessage

@@ -1,6 +1,6 @@
-﻿namespace Application.Validations
+﻿namespace Application.Configurations
 {
-    public class PasswordValidation : IPasswordValidation
+    public class PasswordConfiguration : IPasswordConfiguration
     {
         public required string RegexPattern { get; set; }
         public required string ErrorMessage { get; set; }

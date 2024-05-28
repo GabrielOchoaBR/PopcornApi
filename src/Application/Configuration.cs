@@ -1,4 +1,5 @@
-﻿using Application.Engines.Cryptography;
+﻿using Application.Configurations;
+using Application.Engines.Cryptography;
 using Application.Engines.DataControl;
 using Application.Logging;
 using Application.Validations;
@@ -12,7 +13,7 @@ namespace Application
     [ExcludeFromCodeCoverage]
     public static class Configuration
     {
-        public static void AddApplicationConfiguration(this IServiceCollection services, PasswordValidation passwordValidatorConfiguration)
+        public static void AddApplicationConfiguration(this IServiceCollection services, PasswordConfiguration passwordValidatorConfiguration)
         {
             services.AddMediatR(cfg =>
             {
@@ -21,7 +22,7 @@ namespace Application
             });
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             services.AddValidatorsFromAssembly(typeof(Configuration).Assembly);
-            services.AddSingleton<IPasswordValidation>(passwordValidatorConfiguration);
+            services.AddSingleton<IPasswordConfiguration>(passwordValidatorConfiguration);
             services.AddTransient<ITextCryptography, TextCryptography>();
             services.AddTransient<IUserDataControl, UserDataControl>();
         }
