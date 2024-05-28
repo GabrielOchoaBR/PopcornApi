@@ -15,10 +15,11 @@ namespace Application.Validations
             if (validation != null && !validation.IsValid)
             {
                 var errors = validation.Errors.Where(x => x is not null)
-                                                .GroupBy(
-                                                    x => x.PropertyName, x => x.ErrorMessage,
-                                                    (propertyName, errorMessages) => new { Key = propertyName, Values = errorMessages.Distinct().ToArray() })
-                                                .ToDictionary(x => x.Key, x => x.Values);
+                                              .GroupBy(
+                                                            x => x.PropertyName, 
+                                                            x => x.ErrorMessage,
+                                                            (propertyName, errorMessages) => new { Key = propertyName, Values = errorMessages.Distinct().ToArray() }
+                                                      ).ToDictionary(x => x.Key, x => x.Values);
 
                 if (errors.Count > 0)
                 {
