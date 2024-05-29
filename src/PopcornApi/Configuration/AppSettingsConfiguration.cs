@@ -6,9 +6,12 @@ namespace PopcornApi.Configuration
     {
         public static AppSettings GetSettings()
         {
+            string enviroment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")!;
+
             IConfigurationRoot configurationRoot = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{enviroment}.json", optional: true)
                 .Build();
 
             return new()

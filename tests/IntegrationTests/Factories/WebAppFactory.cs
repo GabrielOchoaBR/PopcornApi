@@ -38,6 +38,8 @@ namespace IntegrationTests.Factories
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development");
+
             builder.ConfigureLogging(x =>
             {
                 x.ClearProviders();
@@ -54,7 +56,7 @@ namespace IntegrationTests.Factories
                 });
                 services.AddScoped<AppDbContext.Connection>(x =>
                     () => (IMongoDatabase)x.GetRequiredService(typeof(IMongoDatabase)));
-            });
+            }); 
         }
     }
 }
