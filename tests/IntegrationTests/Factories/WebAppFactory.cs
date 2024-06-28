@@ -27,14 +27,14 @@ namespace IntegrationTests.Factories
 
             UnitOfWork = new UnitOfWork(Services.GetRequiredService<IMongoDatabase>);
             TextCryptography = Services.GetRequiredService<ITextCryptography>();
-            UsersFixtures = new UsersFixtures(Services.GetRequiredService<ITokenService>());
-            MediasFixtures = new MediasFixtures();
+            UserFixtures = new UserFixtures(Services.GetRequiredService<ITokenService>());
+            MediaFixtures = new MediaFixtures();
         }
 
         public IUnitOfWork UnitOfWork { get; }
         public ITextCryptography TextCryptography { get; }
-        public UsersFixtures UsersFixtures { get; }
-        public MediasFixtures MediasFixtures { get; }
+        public UserFixtures UserFixtures { get; }
+        public MediaFixtures MediaFixtures { get; }
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {

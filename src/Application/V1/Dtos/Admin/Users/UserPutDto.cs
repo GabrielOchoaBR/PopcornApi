@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using Domain.V1.Entities.Users;
+﻿using Domain.V1.Entities.Users;
 
 namespace Application.V1.Dtos.Admin.Users
 {

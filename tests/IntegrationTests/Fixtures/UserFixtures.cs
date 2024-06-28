@@ -6,12 +6,12 @@ using PopcornApi.Security.TokenServices;
 
 namespace IntegrationTests.Fixtures
 {
-    public class UsersFixtures
+    public class UserFixtures
     {
         private readonly Fixture fixture = new();
         private readonly ITokenService tokenService;
 
-        public UsersFixtures(ITokenService tokenService)
+        public UserFixtures(ITokenService tokenService)
         {
             fixture.Register(ObjectId.GenerateNewId);
             this.tokenService = tokenService;

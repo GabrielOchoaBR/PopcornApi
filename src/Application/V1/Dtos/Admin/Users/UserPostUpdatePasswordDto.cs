@@ -2,7 +2,5 @@
 {
     public record UserPostUpdatePasswordDto(string Id,
                                             string OldPassword,
-                                            string NewPassword)
-    {
-    }
+                                            string NewPassword);
 }

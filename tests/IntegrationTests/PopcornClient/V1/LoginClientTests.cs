@@ -47,7 +47,7 @@ namespace IntegrationTests.PopcornClient.V1
         public async Task GetByNameAndPassword_WithData_ReturnsOk()
         {
             //Arrange
-            User user = webApp.UsersFixtures.CreateUser().First();
+            User user = webApp.UserFixtures.CreateUser().First();
             user.Password = await webApp.TextCryptography.HashAsync(Password);
             await webApp.UnitOfWork.GetUserRepository().InsertOneAsync(user);
 
@@ -90,8 +90,8 @@ namespace IntegrationTests.PopcornClient.V1
         public async Task Revoke_WithData_ReturnsOk()
         {
             //Arrange
-            string token = webApp.UsersFixtures.CreateToken([]);
-            User user = webApp.UsersFixtures.CreateUser().First();
+            string token = webApp.UserFixtures.CreateToken([]);
+            User user = webApp.UserFixtures.CreateUser().First();
             await webApp.UnitOfWork.GetUserRepository().InsertOneAsync(user);
 
             //Act
@@ -113,8 +113,8 @@ namespace IntegrationTests.PopcornClient.V1
             string newPassword = "NewStrongPassword@123";
             string oldPassword = Password;
 
-            string token = webApp.UsersFixtures.CreateToken([]);
-            User user = webApp.UsersFixtures.CreateUser().First();
+            string token = webApp.UserFixtures.CreateToken([]);
+            User user = webApp.UserFixtures.CreateUser().First();
             user.Password = await webApp.TextCryptography.HashAsync(oldPassword);
             await webApp.UnitOfWork.GetUserRepository().InsertOneAsync(user);
 

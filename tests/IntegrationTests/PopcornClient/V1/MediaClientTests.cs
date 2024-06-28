@@ -17,11 +17,11 @@ namespace IntegrationTests.PopcornClient.V1
         public async Task GetAll_WithData_ReturnsOk()
         {
             //Arrange
-            IEnumerable<Media> medias = webApp.MediasFixtures.CreateMedia(10);
+            IEnumerable<Media> medias = webApp.MediaFixtures.CreateMedia(10);
             foreach (var media in medias)
                 await webApp.UnitOfWork.GetMediaRepository().InsertOneAsync(media);
 
-            string token = webApp.UsersFixtures.CreateToken([RoleType.Read]);
+            string token = webApp.UserFixtures.CreateToken([RoleType.Read]);
             var queryGetAll = new QueryGetAll()
             {
                 SearchTerm = "title",
@@ -45,9 +45,9 @@ namespace IntegrationTests.PopcornClient.V1
         public async Task GetById_WrongData_ReturnsOk()
         {
             //Arrange
-            Media media = webApp.MediasFixtures.CreateMedia().First();
+            Media media = webApp.MediaFixtures.CreateMedia().First();
             await webApp.UnitOfWork.GetMediaRepository().InsertOneAsync(media);
-            string token = webApp.UsersFixtures.CreateToken([RoleType.Read]);
+            string token = webApp.UserFixtures.CreateToken([RoleType.Read]);
 
             //Act
             var mediaClient = new MediaClient(string.Empty, httpClientFactory, token);
@@ -64,9 +64,9 @@ namespace IntegrationTests.PopcornClient.V1
         public async Task GetById_WithData_ReturnsOk()
         {
             //Arrange
-            Media media = webApp.MediasFixtures.CreateMedia().First();
+            Media media = webApp.MediaFixtures.CreateMedia().First();
             await webApp.UnitOfWork.GetMediaRepository().InsertOneAsync(media);
-            string token = webApp.UsersFixtures.CreateToken([RoleType.Read]);
+            string token = webApp.UserFixtures.CreateToken([RoleType.Read]);
 
             //Act
             var mediaClient = new MediaClient(string.Empty, httpClientFactory, token);
@@ -84,7 +84,7 @@ namespace IntegrationTests.PopcornClient.V1
         {
             //Arrange
             var mediaPostDto = fixture.Create<MediaPostDto>();
-            string token = webApp.UsersFixtures.CreateToken([RoleType.Write]);
+            string token = webApp.UserFixtures.CreateToken([RoleType.Write]);
 
             //Act
             var mediaClient = new MediaClient(string.Empty, httpClientFactory, token);
@@ -99,14 +99,14 @@ namespace IntegrationTests.PopcornClient.V1
         public async Task Update_WithData_ReturnsOk()
         {
             //Arrange
-            Media media = webApp.MediasFixtures.CreateMedia().First();
+            Media media = webApp.MediaFixtures.CreateMedia().First();
             await webApp.UnitOfWork.GetMediaRepository().InsertOneAsync(media);
 
             var mediaPutDto = fixture.Build<MediaPutDto>()
                 .With(x => x.Id, media.Id.ToString())
                 .Create();
 
-            string token = webApp.UsersFixtures.CreateToken([RoleType.Write]);
+            string token = webApp.UserFixtures.CreateToken([RoleType.Write]);
 
             //Act
             var mediaClient = new MediaClient(string.Empty, httpClientFactory, token);
@@ -123,9 +123,9 @@ namespace IntegrationTests.PopcornClient.V1
         public async Task Delete_WithData_ReturnsOk()
         {
             //Arrange
-            Media media = webApp.MediasFixtures.CreateMedia().First();
+            Media media = webApp.MediaFixtures.CreateMedia().First();
             await webApp.UnitOfWork.GetMediaRepository().InsertOneAsync(media);
-            string token = webApp.UsersFixtures.CreateToken([RoleType.Write]);
+            string token = webApp.UserFixtures.CreateToken([RoleType.Write]);
 
             //Act
             var mediaClient = new MediaClient(string.Empty, httpClientFactory, token);

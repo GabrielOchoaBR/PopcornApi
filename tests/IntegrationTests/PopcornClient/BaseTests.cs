@@ -17,6 +17,5 @@ namespace IntegrationTests.PopcornClient
 
             fixture.Register(ObjectId.GenerateNewId);
         }
-
     }
 }

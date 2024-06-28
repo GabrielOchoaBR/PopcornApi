@@ -4,11 +4,11 @@ using MongoDB.Bson;
 
 namespace IntegrationTests.Fixtures
 {
-    internal class MediasFixtures
+    internal class MediaFixtures
     {
         private readonly Fixture fixture = new();
 
-        public MediasFixtures()
+        public MediaFixtures()
         {
             fixture.Register(ObjectId.GenerateNewId);
         }

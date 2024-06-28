@@ -1,5 +1,4 @@
-﻿using Amazon.Runtime;
-using Application.V1.Dtos.Admin.Users;
+﻿using Application.V1.Dtos.Admin.Users;
 using PopcornApi.Model.Login;
 using PopcornClient.Model;
 

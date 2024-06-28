@@ -17,8 +17,8 @@ namespace IntegrationTests.PopcornClient.V1
         public async Task GetAll_WithData_ReturnsOk()
         {
             //Arrange
-            await webApp.UnitOfWork.GetUserRepository().InsertOneAsync(webApp.UsersFixtures.CreateUser().First());
-            string token = webApp.UsersFixtures.CreateToken([RoleType.Read]);
+            await webApp.UnitOfWork.GetUserRepository().InsertOneAsync(webApp.UserFixtures.CreateUser().First());
+            string token = webApp.UserFixtures.CreateToken([RoleType.Read]);
 
             //Act
             var userClient = new UserClient(string.Empty, httpClientFactory, token);
@@ -33,9 +33,9 @@ namespace IntegrationTests.PopcornClient.V1
         public async Task GetById_WrongData_ReturnsOk()
         {
             //Arrange
-            User user = webApp.UsersFixtures.CreateUser().First();
+            User user = webApp.UserFixtures.CreateUser().First();
             await webApp.UnitOfWork.GetUserRepository().InsertOneAsync(user);
-            string token = webApp.UsersFixtures.CreateToken([RoleType.Read]);
+            string token = webApp.UserFixtures.CreateToken([RoleType.Read]);
 
             //Act
             var userClient = new UserClient(string.Empty, httpClientFactory, token);
@@ -52,9 +52,9 @@ namespace IntegrationTests.PopcornClient.V1
         public async Task GetById_WithData_ReturnsOk()
         {
             //Arrange
-            User user = webApp.UsersFixtures.CreateUser().First();
+            User user = webApp.UserFixtures.CreateUser().First();
             await webApp.UnitOfWork.GetUserRepository().InsertOneAsync(user);
-            string token = webApp.UsersFixtures.CreateToken([RoleType.Read]);
+            string token = webApp.UserFixtures.CreateToken([RoleType.Read]);
 
             //Act
             var userClient = new UserClient(string.Empty, httpClientFactory, token);
@@ -76,7 +76,7 @@ namespace IntegrationTests.PopcornClient.V1
                 .With(x => x.Password, Password)
                 .With(x => x.Email, Email)
                 .Create();
-            string token = webApp.UsersFixtures.CreateToken([]);
+            string token = webApp.UserFixtures.CreateToken([]);
 
             //Act
             var userClient = new UserClient(string.Empty, httpClientFactory, token);
@@ -94,7 +94,7 @@ namespace IntegrationTests.PopcornClient.V1
             //Arrange
             const string newEmail = "newEmail@email.com";
 
-            User user = webApp.UsersFixtures.CreateUser().First();
+            User user = webApp.UserFixtures.CreateUser().First();
             await webApp.UnitOfWork.GetUserRepository().InsertOneAsync(user);
 
             var userPutDto = fixture.Build<UserPutDto>()
@@ -102,7 +102,7 @@ namespace IntegrationTests.PopcornClient.V1
                 .With(x => x.Email, newEmail)
                 .Create();
 
-            string token = webApp.UsersFixtures.CreateToken([RoleType.Write]);
+            string token = webApp.UserFixtures.CreateToken([RoleType.Write]);
 
             //Act
             var userClient = new UserClient(string.Empty, httpClientFactory, token);
@@ -121,9 +121,9 @@ namespace IntegrationTests.PopcornClient.V1
         public async Task Delete_WithData_ReturnsOk()
         {
             //Arrange
-            User user = webApp.UsersFixtures.CreateUser().First();
+            User user = webApp.UserFixtures.CreateUser().First();
             await webApp.UnitOfWork.GetUserRepository().InsertOneAsync(user);
-            string token = webApp.UsersFixtures.CreateToken([RoleType.Write]);
+            string token = webApp.UserFixtures.CreateToken([RoleType.Write]);
 
             //Act
             var userClient = new UserClient(string.Empty, httpClientFactory, token);
